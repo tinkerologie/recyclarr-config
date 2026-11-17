@@ -4,7 +4,7 @@ This file provides guidance to AI coding agents working in this repository.
 
 ## Repository purpose
 
-This repo is **configuration only** — no code, no build, no tests. It feeds [Recyclarr](https://recyclarr.net), a CLI that syncs quality definitions, custom formats, and quality profiles from [TRaSH Guides](https://trash-guides.info) into Sonarr (TV) and Radarr (movies).
+This repo is **configuration only** — no application code or build. CI parses the tracked configuration without connecting to Sonarr or Radarr. It feeds [Recyclarr](https://recyclarr.net), a CLI that syncs quality definitions, custom formats, and quality profiles from [TRaSH Guides](https://trash-guides.info) into Sonarr (TV) and Radarr (movies).
 
 The whole config is tuned for one playback target: **Apple TV 4K → Sonos Arc**. Every score in the YAML files exists to push releases toward formats that path can decode losslessly, and away from ones it can't.
 
@@ -16,7 +16,7 @@ The whole config is tuned for one playback target: **Apple TV 4K → Sonos Arc**
 
 ## Commands
 
-There is no build/test/lint pipeline in-repo. Recyclarr runs externally:
+CI runs `uv run --no-project --with ruamel.yaml==0.19.1 python scripts/validate_config.py`. Recyclarr runs externally:
 
 ```sh
 recyclarr sync          # apply configs to Sonarr + Radarr
